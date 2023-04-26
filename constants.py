@@ -1,0 +1,5 @@
+# USERNAME = "user"
+# PASSWORD = "password"
+NAMESPACE = "kubeflow"
+# HOST = "http://localhost:3000"
+HOST = "https://c391-123-16-13-79.ap.ngrok.io"
