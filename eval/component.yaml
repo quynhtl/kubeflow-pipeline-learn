@@ -1,0 +1,18 @@
+name: eval
+description: evaluate the model with test data
+inputs:
+- {name: Preprocess Data Path, type: String}
+- {name: Model Path, type: Model}
+outputs:
+- {name: mlpipeline_metrics, type: Metrics}
+
+implementation:
+  container:
+    image: khongtrunght/eval:dev
+    command: [
+      python3, /pipelines/component/src/eval.py,
+      --preprocess-data-path, {inputPath: Preprocess Data Path},
+      --model-path, {inputPath: Model Path},
+      --output-metadata-path, {outputPath: mlpipeline_metrics},
+    ]
+

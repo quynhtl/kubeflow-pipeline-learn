@@ -1,0 +1,32 @@
+name: train
+description: train the model with input data
+inputs:
+- {name: Preprocess Data Path, type: String}
+- {name: Hidden Dim 1, type: Integer}
+- {name: Hidden Dim 2, type: Integer}
+- {name: Dropout, type: Float}
+- {name: Learning Rate, type: Float}
+- {name: Epochs, type: Integer}
+- {name: Batch Size, type: Integer}
+outputs:
+- {name: mlpipeline-ui-metadata}
+- {name: Model Path, type: Model}
+
+implementation:
+  container:
+    image: khongtrunght/train:dev-board-v3
+    imagePullPolicy: Always
+    command: [
+      python3, /pipelines/component/src/train.py,
+      --model-path, {outputPath: Model Path},
+      --preprocess-data-path, {inputPath: Preprocess Data Path},
+      --hidden-dim1, {inputValue: Hidden Dim 1},
+      --hidden-dim2, {inputValue: Hidden Dim 2},
+      --dropout, {inputValue: Dropout},
+      --learning-rate, {inputValue: Learning Rate},
+      --epochs, {inputValue: Epochs},
+      --batch-size, {inputValue: Batch Size},
+      --output-metadata-path, {outputPath: mlpipeline-ui-metadata},
+
+    ]
+
