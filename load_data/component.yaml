@@ -1,0 +1,16 @@
+name: load_data
+description: Load data and combine
+inputs:
+- {name: Data Path, type: String}
+outputs:
+- {name: Load Data Path, type: String}
+
+implementation:
+  container:
+    image: khongtrunght/load_data:latest
+    command: [
+      python3, /pipelines/component/src/load_data.py,
+      --load-data-path, {outputPath: Load Data Path},
+      --data-path, {inputPath: Data Path},
+    ]
+

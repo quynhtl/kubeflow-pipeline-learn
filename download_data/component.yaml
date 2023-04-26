@@ -1,0 +1,15 @@
+name: download_data
+description: Download data from URL and save
+inputs:
+- {name: Download Link, type: String}
+outputs:
+- {name: Data Path, type: String}
+
+implementation:
+  container:
+    image: khongtrunght/download_data:latest
+    command: [
+      python3, /pipelines/component/src/download_data.py,
+      --data-path, {outputPath: Data Path},
+      --download-link, {inputValue: Download Link},
+    ]

@@ -1,0 +1,19 @@
+name: preprocess_data
+description: preprocess data
+inputs:
+- {name: Load Data Path, type: String}
+- {name: Test Size, type: Float}
+outputs:
+- {name: Preprocess Data Path, type: String}
+- {name: mlpipeline_ui_metadata}
+implementation:
+  container:
+    image: khongtrunght/preprocess_data:latest
+    command: [
+      python3, /pipelines/component/src/preprocess.py,
+      --load-data-path, {inputPath: Load Data Path},
+      --preprocess-data-path, {outputPath: Preprocess Data Path},
+      --test-size, {inputValue: Test Size},
+      --mlpipeline-ui-metadata-path, {outputPath: mlpipeline_ui_metadata},
+    ]
+
